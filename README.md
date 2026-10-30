@@ -22,6 +22,7 @@ Everything lives in this GitHub repo. There's no outside service.
 | `submit.html` | The submission form. Builds an email and opens the tech's mail app. |
 | `data/devices.json` | The database. One entry per device. |
 | `media/<device-id>/` | Photos and manual PDFs for each device. |
+| `flipbook/` | Printable PDFs of the 14-card field flipbook (4×6 and Letter). |
 | `.github/workflows/check-data.yml` | Checks the data and media files on every change. |
 
 ---

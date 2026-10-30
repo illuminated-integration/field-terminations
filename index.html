@@ -75,6 +75,7 @@
   .empty { border: 2px dashed var(--muted); border-radius: 8px; padding: 24px; text-align: center; }
   .cta { display: inline-block; font-family: var(--brand); letter-spacing: 0.08em; text-transform: uppercase; font-size: 14px;
          background: var(--magenta); color: var(--black); text-decoration: none; padding: 12px 18px; border-radius: 6px; min-height: 44px; }
+  .cta.alt { background: #FFFFFF; border: 2px solid var(--black); }
   .cta:focus-visible { outline: 3px solid var(--black); outline-offset: 2px; }
   footer { border-top: 1px solid var(--rule); margin-top: 32px; }
   footer .bar { justify-content: space-between; color: var(--muted); font-size: 14px; }
@@ -103,8 +104,10 @@
   </div>
   <p class="count" id="count" aria-live="polite"></p>
   <div id="list"></div>
-  <p style="margin-top: 24px">
+  <p style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px">
     <a class="cta" id="submit" href="#">Submit a new device</a>
+    <a class="cta alt" href="flipbook/field-termination-flipbook-4x6.pdf">Flipbook PDF (4×6 cards)</a>
+    <a class="cta alt" href="flipbook/field-termination-flipbook-letter.pdf">Flipbook PDF (Letter, 2 per page)</a>
   </p>
 </main>
 
@@ -124,7 +127,8 @@
   };
   const WIRE_COLORS = {                // turns a wire name into a color swatch
     red: "#D7262E", black: "#141414", white: "#FFFFFF", drain: "#A7ADB4", clear: "#EEF1F4",
-    orange: "#F07C1A", green: "#2E9E44", blue: "#1F5FD0", brown: "#7A4A23", yellow: "#F2C511"
+    orange: "#F07C1A", green: "#2E9E44", blue: "#1F5FD0", brown: "#7A4A23", yellow: "#F2C511",
+    grey: "#8A9097", gray: "#8A9097", violet: "#8E5CD9", purple: "#8E5CD9", pink: "#F2A2B8", slate: "#708090", shield: "#A7ADB4"
   };
 
   const $ = (s) => document.querySelector(s);
@@ -208,7 +212,7 @@
   $("#q").addEventListener("input", render);
   $("#submit").href = issueURL();
 
-  fetch("data/devices.json")
+  fetch("data/devices.json", { cache: "no-cache" })
     .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then((data) => {
       devices = data.sort((a, b) => a.category.localeCompare(b.category) || a.title.localeCompare(b.title));
