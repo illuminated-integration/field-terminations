@@ -129,7 +129,7 @@
     "title": "Tally Interface",
     "manufacturer": "Standard",
     "model": "DB-25",
-    "category": "Video",
+    "category": "Video/RF",
     "connector": "DB-25",
     "pins": [
       { "pin": "1", "signal": "Camera 1 Tally", "wire": "Black" },
@@ -149,6 +149,7 @@
     "notes": [
       "General GPI pinnout for tally controllers"
     ],
+    "source": "Blackmagic GPI Tally",
     "updated": "2026-10-30"
   }
 ]
