@@ -123,5 +123,33 @@
     ],
     "source": "Flipbook card 05",
     "updated": "2026-10-30"
+  },
+  {
+    "id": "ptz-tally-db25",
+    "title": "Tally Interface",
+    "manufacturer": "Standard",
+    "model": "DB-25",
+    "category": "Video/RF",
+    "connector": "DB-25",
+    "pins": [
+      { "pin": "1", "signal": "Camera 1 Tally", "wire": "Black" },
+      { "pin": "2", "signal": "Camera 2 Tally", "wire": "Black" },
+      { "pin": "3", "signal": "Camera 3 Tally", "wire": "Black" },
+      { "pin": "4", "signal": "Camera 4 Tally", "wire": "Black" },
+      { "pin": "5", "signal": "Ground", "wire": "Green" },
+      { "pin": "6", "signal": "Ground", "wire": "Green" },
+      { "pin": "7", "signal": "Ground", "wire": "Green" },
+      { "pin": "8", "signal": "Ground", "wire": "Green" },
+      { "pin": "9", "signal": "N/C", "wire": "Grey" },
+      { "pin": "10", "signal": "N/C", "wire": "Grey" },
+      { "pin": "11", "signal": "N/C", "wire": "Grey" },
+      { "pin": "12", "signal": "N/C", "wire": "Grey" },
+      { "pin": "13", "signal": "Ground", "wire": "Green" }
+    ],
+    "notes": [
+      "General GPI pinnout for tally controllers"
+    ],
+    "source": "Blackmagic GPI Tally",
+    "updated": "2026-10-30"
   }
 ]
