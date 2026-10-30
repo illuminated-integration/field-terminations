@@ -32,7 +32,7 @@ Everything lives in this GitHub repo. There's no outside service.
 3. **Settings → Pages →** Deploy from a branch → `main` / `(root)` → Save. The site appears at the URL above in a minute or two.
 4. In `submit.html`, set the address submissions go to (near the bottom):
    ```js
-   const SUBMIT_EMAIL = "terminations@illuminated-integration.com";
+   const SUBMIT_EMAIL = "development-team@illuminated-integration.com";
    ```
    A shared mailbox or distribution list works best, so submissions don't depend on one person.
 
