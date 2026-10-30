@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit a device · Field Terminations</title>
+<link rel="icon" href="assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Condensed:wght@400;600;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --black:#000; --magenta:#D241FA; --mint:#0CF7BD; --magenta-tint:#FBEEFE; --mint-tint:#E3FEF7; --muted:#4B5058; --rule:#D5D8DC;
+          --brand:'Lexend', system-ui, sans-serif; --body:'IBM Plex Sans Condensed','Arial Narrow',sans-serif; --mono:'IBM Plex Mono', monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--body); font-size: 17px; color: var(--black); }
+  header { background: var(--black); color: #fff; border-bottom: 5px solid var(--magenta); }
+  .bar { max-width: 760px; margin: 0 auto; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .bar img { height: 44px; display: block; }
+  .bar h1 { margin: 0; flex: 1 1 220px; text-align: right; font-family: var(--brand); font-weight: 400; font-size: 18px; letter-spacing: .12em; text-transform: uppercase; }
+  main { max-width: 760px; margin: 0 auto; padding: 20px; }
+  a { color: var(--black); }
+  form { display: grid; gap: 16px; margin-top: 12px; }
+  .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  label { display: block; font-weight: 700; margin-bottom: 6px; }
+  .hint { display: block; font-weight: 400; color: var(--muted); font-size: 15px; margin-top: 2px; }
+  input, select, textarea { width: 100%; font: inherit; padding: 11px 12px; border: 2px solid var(--black); border-radius: 6px; min-height: 48px; background: #fff; }
+  textarea { min-height: 120px; }
+  #pins { font-family: var(--mono); font-size: 15px; }
+  input:focus, select:focus, textarea:focus { outline: 3px solid var(--magenta); outline-offset: 2px; }
+  fieldset { border: 1.5px solid var(--black); border-radius: 8px; padding: 14px; margin: 0; display: grid; gap: 14px; }
+  legend { font-family: var(--brand); letter-spacing: .1em; text-transform: uppercase; font-size: 14px; padding: 0 6px; }
+  .btn { font-family: var(--brand); letter-spacing: .08em; text-transform: uppercase; font-size: 15px; background: var(--magenta); color: var(--black);
+         border: 2px solid var(--magenta); border-radius: 6px; padding: 12px 18px; min-height: 48px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; }
+  .btn.secondary { background: #fff; border-color: var(--black); }
+  .btn:focus-visible { outline: 3px solid var(--black); outline-offset: 2px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .box { border-radius: 8px; padding: 12px 14px; border: 1.5px solid var(--black); }
+  .box.mint { background: var(--mint-tint); }
+  .box.mag { background: var(--magenta-tint); }
+  ol.attach { margin: 6px 0 0; padding-left: 20px; }
+  #err { display: none; }
+  #after { display: none; }
+  #preview { width: 100%; min-height: 220px; font-family: var(--mono); font-size: 13px; white-space: pre; }
+</style>
+</head>
+<body>
+<header><div class="bar"><img src="assets/logo-primary-white.png" alt="Illuminated Integration"><h1>Submit a device</h1></div></header>
+<main>
+  <p><a href="./">← Back to all terminations</a></p>
+  <p>Fill this in and tap <b>Open email</b>. Your email app opens with everything written for you. Attach your photos there and hit send. The team reviews every submission before it goes on the site.</p>
+
+  <form id="f" novalidate>
+    <div class="row">
+      <div><label for="manufacturer">Manufacturer</label><input id="manufacturer" required maxlength="80" placeholder="e.g. QSC"></div>
+      <div><label for="model">Model</label><input id="model" required maxlength="80" placeholder="e.g. Core 110f"></div>
+    </div>
+    <div class="row">
+      <div><label for="category">Category</label>
+        <select id="category" required>
+          <option value="">Choose…</option>
+          <option>Audio</option><option>Lighting</option><option>Network</option>
+          <option>Fiber</option><option>Video/RF</option><option>Control</option>
+        </select></div>
+      <div><label for="connector">Connector / port</label><input id="connector" required maxlength="120" placeholder="e.g. Mic/Line In 1, Euroblock"></div>
+    </div>
+    <div><label for="pins">Pinout <span class="hint">One pin per line: pin, signal, wire color</span></label>
+      <textarea id="pins" required maxlength="2000" placeholder="+, Audio hot, Red&#10;-, Audio cold, Black&#10;G, Shield, Drain"></textarea></div>
+    <div><label for="notes">Notes and gotchas <span class="hint">Optional</span></label>
+      <textarea id="notes" maxlength="1500"></textarea></div>
+
+    <fieldset>
+      <legend>Source &amp; manual</legend>
+      <div><label for="source">Where did this pinout come from?</label>
+        <input id="source" required maxlength="200" placeholder="e.g. Manual p. 14, verified on site at [job]"></div>
+      <div class="row">
+        <div><label for="manual_url">Manual link <span class="hint">Manufacturer's download page, if there is one</span></label>
+          <input id="manual_url" type="url" maxlength="400" placeholder="https://"></div>
+        <div><label for="manual_page">Page <span class="hint">Optional</span></label><input id="manual_page" maxlength="20"></div>
+      </div>
+    </fieldset>
+
+    <div><label for="submitter">Your name</label><input id="submitter" required maxlength="80"></div>
+
+    <div class="box mint">
+      <b>In the email, attach:</b>
+      <ol class="attach">
+        <li>Photos of the terminal, label and your finished wiring</li>
+        <li>The manual PDF, if there's no link to paste above</li>
+      </ol>
+    </div>
+
+    <div class="actions"><button type="submit" class="btn">Open email</button></div>
+    <div id="err" class="box mag" role="alert"></div>
+  </form>
+
+  <section id="after" aria-live="polite">
+    <h2 style="font-family: var(--brand); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; font-size: 18px">Did your email app open?</h2>
+    <p>If not (for example, you use webmail on a computer), copy this and email it to <a id="addr" href="#"></a> with your photos attached.</p>
+    <div class="actions" style="margin-bottom: 10px">
+      <button type="button" class="btn" id="copy">Copy email text</button>
+      <a class="btn secondary" id="retry" href="#">Try opening email again</a>
+    </div>
+    <label for="preview">Email text</label>
+    <textarea id="preview" readonly></textarea>
+  </section>
+</main>
+
+<script>
+  // ---- Setting: where submissions go ----
+  const SUBMIT_EMAIL = "terminations@illuminated-integration.com";   // TODO: replace with the real address
+
+  const $ = (s) => document.querySelector(s);
+  const val = (id) => $("#" + id).value.trim();
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+  function buildEmail() {
+    const d = Object.fromEntries(["manufacturer", "model", "category", "connector", "pins", "notes", "source", "manual_url", "manual_page", "submitter"].map((k) => [k, val(k)]));
+    const id = slug(`${d.manufacturer}-${d.model}-${d.connector}`).slice(0, 60);
+    const today = new Date().toISOString().slice(0, 10);
+    const pins = d.pins.split("\n").map((l) => l.trim()).filter(Boolean).map((l) => {
+      const c = l.split(/\s*[,\t]\s*/);
+      return { pin: c[0] || "", signal: c[1] || "", wire: c.slice(2).join(", ") };
+    });
+
+    // Ready-to-paste entry for data/devices.json. The reviewer only adds photo/manual file names.
+    const entry = {
+      id, title: `${d.manufacturer} ${d.model}: ${d.connector}`,
+      manufacturer: d.manufacturer, model: d.model, category: d.category, connector: d.connector,
+      pins, notes: d.notes ? [d.notes] : [],
+      images: [], manuals: d.manual_url ? [{ title: `${d.model} manual`, url: d.manual_url, page: d.manual_page }] : [],
+      source: d.source, updated: today,
+    };
+
+    const subject = `[Field Terminations] ${d.manufacturer} ${d.model} - ${d.connector}`;
+    const body = [
+      `Manufacturer: ${d.manufacturer}`,
+      `Model: ${d.model}`,
+      `Category: ${d.category}`,
+      `Connector / port: ${d.connector}`,
+      "",
+      "PINOUT (pin | signal | wire)",
+      ...pins.map((p) => `  ${p.pin} | ${p.signal} | ${p.wire}`),
+      "",
+      `Notes: ${d.notes || "none"}`,
+      `Source: ${d.source}`,
+      `Manual: ${d.manual_url || "attached / none"}${d.manual_page ? ` (p. ${d.manual_page})` : ""}`,
+      `Submitted by: ${d.submitter}`,
+      "",
+      "Photos and manual: see attachments.",
+      "",
+      "----- For the reviewer: paste into data/devices.json -----",
+      compactJSON(entry),
+    ].join("\n");
+    return { subject, body };
+  }
+
+  // Pretty JSON, but each pin and manual on one line to keep the email link short.
+  function compactJSON(o) {
+    const one = (x) => JSON.stringify(x).replace(/","/g, '", "').replace(/":"/g, '": "');
+    const lines = Object.entries(o).map(([k, v]) => {
+      if (Array.isArray(v) && v.length && typeof v[0] === "object") return ` "${k}": [\n  ${v.map(one).join(",\n  ")}\n ]`;
+      return ` "${k}": ${JSON.stringify(v)}`;
+    });
+    return "{\n" + lines.join(",\n") + "\n}";
+  }
+
+  function mailto({ subject, body }) {
+    return `mailto:${SUBMIT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.replace(/\n/g, "\r\n"))}`;
+  }
+
+  $("#f").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const missing = [...e.target.querySelectorAll("[required]")].find((el) => !el.value.trim());
+    if (missing) {
+      const name = e.target.querySelector(`label[for=${missing.id}]`).firstChild.textContent.trim();
+      $("#err").style.display = "block"; $("#err").textContent = `Please fill in “${name}”.`; missing.focus(); return;
+    }
+    $("#err").style.display = "none";
+    const email = buildEmail();
+    const link = mailto(email);
+    $("#preview").value = `To: ${SUBMIT_EMAIL}\nSubject: ${email.subject}\n\n${email.body}`;
+    $("#addr").textContent = SUBMIT_EMAIL; $("#addr").href = `mailto:${SUBMIT_EMAIL}`;
+    $("#retry").href = link;
+    $("#after").style.display = "block";
+    window.location.href = link;      // opens the phone's email app
+    $("#after").scrollIntoView({ behavior: "smooth" });
+  });
+
+  $("#copy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText($("#preview").value); $("#copy").textContent = "Copied"; }
+    catch { $("#preview").select(); document.execCommand("copy"); $("#copy").textContent = "Copied"; }
+    setTimeout(() => ($("#copy").textContent = "Copy email text"), 2000);
+  });
+</script>
+</body>
+</html>

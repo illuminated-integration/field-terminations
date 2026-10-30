@@ -1,0 +1,127 @@
+[
+  {
+    "id": "std-xlr3-audio",
+    "title": "XLR-3 balanced audio",
+    "manufacturer": "Standard",
+    "model": "AES14",
+    "category": "Audio",
+    "connector": "XLR-3",
+    "pins": [
+      { "pin": "1", "signal": "Shield / Ground", "wire": "Drain" },
+      { "pin": "2", "signal": "Hot (+)", "wire": "Red" },
+      { "pin": "3", "signal": "Cold (-)", "wire": "Black" }
+    ],
+    "notes": [
+      "Black is never hot.",
+      "Red/White pair: Red to pin 2, White to pin 3. White/Black pair: White to pin 2."
+    ],
+    "source": "AES14 + house standard (flipbook card 02)",
+    "updated": "2026-10-30"
+  },
+  {
+    "id": "std-dmx-xlr5",
+    "title": "DMX512 on 5-pin XLR",
+    "manufacturer": "Standard",
+    "model": "ANSI E1.11",
+    "category": "Lighting",
+    "connector": "XLR-5",
+    "pins": [
+      { "pin": "1", "signal": "Common / Shield", "wire": "Drain" },
+      { "pin": "2", "signal": "Data 1 -", "wire": "Black (pair 1)" },
+      { "pin": "3", "signal": "Data 1 +", "wire": "Red (pair 1)" },
+      { "pin": "4", "signal": "Data 2 -", "wire": "Black (pair 2)" },
+      { "pin": "5", "signal": "Data 2 +", "wire": "White (pair 2)" }
+    ],
+    "notes": [
+      "Wire colors are for Belden 9729. Keep each black with its own pair.",
+      "Terminate the last device with 120 ohms across pins 2 and 3."
+    ],
+    "source": "ANSI E1.11 + house standard (flipbook cards 06-07)",
+    "updated": "2026-10-30"
+  },
+  {
+    "id": "std-dmx-rj45",
+    "title": "DMX over Cat cable (RJ45)",
+    "manufacturer": "Standard",
+    "model": "ANSI E1.27-2",
+    "category": "Lighting",
+    "connector": "RJ45 (T568B)",
+    "pins": [
+      { "pin": "1", "signal": "Data 1 + (XLR 3)", "wire": "White/Orange" },
+      { "pin": "2", "signal": "Data 1 - (XLR 2)", "wire": "Orange" },
+      { "pin": "3", "signal": "Data 2 + (XLR 5)", "wire": "White/Green" },
+      { "pin": "6", "signal": "Data 2 - (XLR 4)", "wire": "Green" },
+      { "pin": "7", "signal": "Common (XLR 1)", "wire": "White/Brown" },
+      { "pin": "8", "signal": "Common (XLR 1)", "wire": "Brown" }
+    ],
+    "notes": [
+      "Not every vendor follows E1.27-2. Check the manual for pixel and show-control gear.",
+      "DMX on Cat cable is not Ethernet. Never patch it into a switch."
+    ],
+    "source": "ANSI E1.27-2 (flipbook card 09)",
+    "updated": "2026-10-30"
+  },
+  {
+    "id": "std-t568b",
+    "title": "Ethernet T568B",
+    "manufacturer": "Standard",
+    "model": "TIA-568",
+    "category": "Network",
+    "connector": "RJ45",
+    "pins": [
+      { "pin": "1", "signal": "TX+ / pair 2", "wire": "White/Orange" },
+      { "pin": "2", "signal": "TX- / pair 2", "wire": "Orange" },
+      { "pin": "3", "signal": "RX+ / pair 3", "wire": "White/Green" },
+      { "pin": "4", "signal": "Pair 1", "wire": "Blue" },
+      { "pin": "5", "signal": "Pair 1", "wire": "White/Blue" },
+      { "pin": "6", "signal": "RX- / pair 3", "wire": "Green" },
+      { "pin": "7", "signal": "Pair 4", "wire": "White/Brown" },
+      { "pin": "8", "signal": "Pair 4", "wire": "Brown" }
+    ],
+    "notes": [
+      "Plug view: contacts toward you, latch away, pin 1 on the left.",
+      "Untwist no more than 13 mm (1/2 in)."
+    ],
+    "source": "TIA-568 (flipbook card 10)",
+    "updated": "2026-10-30"
+  },
+  {
+    "id": "std-rs232-db9",
+    "title": "RS-232 on DB9 (DTE)",
+    "manufacturer": "Standard",
+    "model": "EIA-232",
+    "category": "Control",
+    "connector": "DB9",
+    "pins": [
+      { "pin": "2", "signal": "RX (to far-end TX)", "wire": "" },
+      { "pin": "3", "signal": "TX (to far-end RX)", "wire": "" },
+      { "pin": "5", "signal": "Ground", "wire": "" }
+    ],
+    "notes": [
+      "Cross TX and RX between devices. Ground to ground.",
+      "No response? Swap TX/RX first, then check baud, parity and stop bits."
+    ],
+    "source": "Flipbook card 13",
+    "updated": "2026-10-30"
+  },
+  {
+    "id": "std-speakon-nl4",
+    "title": "speakON NL4",
+    "manufacturer": "Standard",
+    "model": "Neutrik NL4",
+    "category": "Audio",
+    "connector": "speakON NL4",
+    "pins": [
+      { "pin": "1+", "signal": "Full-range + / LF +", "wire": "Red" },
+      { "pin": "1-", "signal": "Full-range - / LF -", "wire": "Black" },
+      { "pin": "2+", "signal": "HF + (bi-amp)", "wire": "" },
+      { "pin": "2-", "signal": "HF - (bi-amp)", "wire": "" }
+    ],
+    "notes": [
+      "Bi-amp assignment is common, not universal. Check the speaker manual.",
+      "NEVER use ferrules (house rule, flipbook card 05)."
+    ],
+    "source": "Flipbook card 05",
+    "updated": "2026-10-30"
+  }
+]

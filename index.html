@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field Terminations · Illuminated Integration</title>
+<link rel="icon" href="assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Condensed:wght@400;600;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ---- Brand tokens (from the Branding Guidelines PDF) ---- */
+  :root {
+    --black: #000000;
+    --magenta: #D241FA;
+    --mint: #0CF7BD;
+    --magenta-tint: #FBEEFE;
+    --mint-tint: #E3FEF7;
+    --muted: #4B5058;
+    --rule: #D5D8DC;
+    --brand: 'Lexend', system-ui, sans-serif;
+    --body: 'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--body); color: var(--black); background: #FFFFFF; font-size: 17px; }
+
+  header { background: var(--black); color: #FFFFFF; border-bottom: 5px solid var(--magenta); }
+  .bar { max-width: 1100px; margin: 0 auto; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .bar img { height: 44px; width: auto; display: block; }
+  .bar h1 { margin: 0; flex: 1 1 260px; text-align: right; font-family: var(--brand); font-weight: 400;
+            font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+  .tools label { position: absolute; left: -9999px; }
+  #q { flex: 1 1 280px; font: inherit; padding: 12px 14px; border: 2px solid var(--black); border-radius: 6px; min-height: 48px; }
+  #q:focus { outline: 3px solid var(--magenta); outline-offset: 2px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-family: var(--brand); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+          border: 2px solid var(--black); background: #FFFFFF; color: var(--black); border-radius: 999px;
+          padding: 8px 14px; min-height: 44px; cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--mint); }
+  .chip:focus-visible { outline: 3px solid var(--magenta); outline-offset: 2px; }
+
+  .count { color: var(--muted); margin: 0 0 12px; }
+  #list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+
+  .card { border: 1.5px solid var(--black); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+  .card:target { outline: 4px solid var(--magenta); outline-offset: 2px; }
+  .card-head { background: var(--black); color: #FFFFFF; padding: 10px 14px; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+  .card-head h2 { margin: 0; font-family: var(--brand); font-weight: 500; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .tag { font-family: var(--brand); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black);
+         padding: 2px 8px; border-radius: 3px; white-space: nowrap; }
+  .card-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .meta { color: var(--muted); font-size: 15px; margin: 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 16px; }
+  th { text-align: left; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--black); padding: 4px 6px; }
+  td { border-bottom: 1px solid var(--rule); padding: 5px 6px; vertical-align: middle; }
+  .pin { display: inline-flex; min-width: 28px; height: 26px; padding: 0 6px; align-items: center; justify-content: center;
+         border-radius: 13px; font-family: var(--mono); font-weight: 600; font-size: 14px; }
+  .wire { display: inline-flex; align-items: center; gap: 8px; }
+  .sw { width: 30px; height: 12px; border-radius: 6px; border: 1px solid #2A2D31; flex-shrink: 0; }
+  .photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 6px; }
+  .photos a { display: block; }
+  .photos img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+  .manuals { display: flex; flex-wrap: wrap; gap: 8px; }
+  .manuals a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 12px; border: 1.5px solid var(--black);
+               border-radius: 6px; color: var(--black); text-decoration: none; background: var(--mint-tint); font-size: 15px; }
+  .manuals a:focus-visible, .photos a:focus-visible { outline: 3px solid var(--magenta); outline-offset: 2px; }
+  ul.notes { margin: 0; padding-left: 18px; }
+  ul.notes li { margin-bottom: 4px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--rule); padding: 8px 14px; }
+  .foot a { color: var(--black); }
+
+  .empty { border: 2px dashed var(--muted); border-radius: 8px; padding: 24px; text-align: center; }
+  .cta { display: inline-block; font-family: var(--brand); letter-spacing: 0.08em; text-transform: uppercase; font-size: 14px;
+         background: var(--magenta); color: var(--black); text-decoration: none; padding: 12px 18px; border-radius: 6px; min-height: 44px; }
+  .cta:focus-visible { outline: 3px solid var(--black); outline-offset: 2px; }
+  footer { border-top: 1px solid var(--rule); margin-top: 32px; }
+  footer .bar { justify-content: space-between; color: var(--muted); font-size: 14px; }
+  footer .bar img { height: 22px; }
+  footer .brandline { display: flex; align-items: center; gap: 8px; font-family: var(--brand); letter-spacing: 0.1em; color: var(--black); }
+
+  @media print {
+    header, .tools, .foot a, footer, .cta { display: none !important; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <img src="assets/logo-primary-white.png" alt="Illuminated Integration">
+    <h1>Field Terminations</h1>
+  </div>
+</header>
+
+<main>
+  <div class="tools">
+    <label for="q">Search devices</label>
+    <input id="q" type="search" placeholder="Search a device, model, connector or signal…" autocomplete="off">
+    <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+  </div>
+  <p class="count" id="count" aria-live="polite"></p>
+  <div id="list"></div>
+  <p style="margin-top: 24px">
+    <a class="cta" id="submit" href="#">Submit a new device</a>
+  </p>
+</main>
+
+<footer>
+  <div class="bar">
+    <span class="brandline"><img src="assets/logo-mark.png" alt="">ILLUMINATED INTEGRATION</span>
+    <span>illuminated-integration.com · 717 996 4596</span>
+  </div>
+</footer>
+
+<script>
+  // ---- Settings you might change ----
+  const REPO = "illuminated-integration/field-terminations";
+  const CATEGORY_COLORS = {            // header tag color per category
+    Audio: "var(--magenta)", Fiber: "var(--magenta)", "Video/RF": "var(--magenta)",
+    Lighting: "var(--mint)", Network: "var(--mint)", Control: "var(--mint)"
+  };
+  const WIRE_COLORS = {                // turns a wire name into a color swatch
+    red: "#D7262E", black: "#141414", white: "#FFFFFF", drain: "#A7ADB4", clear: "#EEF1F4",
+    orange: "#F07C1A", green: "#2E9E44", blue: "#1F5FD0", brown: "#7A4A23", yellow: "#F2C511"
+  };
+
+  const $ = (s) => document.querySelector(s);
+  let devices = [];
+  let activeCat = "All";
+
+  // Escape text before putting it into HTML, so a typo in the data can't break the page.
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  // Only allow web links and files in this repo (blocks javascript: links from bad data).
+  const safeUrl = (u) => /^(https?:\/\/|media\/)/i.test(String(u || "")) ? esc(u) : "#";
+
+  function swatch(wire) {
+    const w = String(wire || "").toLowerCase();
+    const parts = w.split("/").map((p) => p.trim().split(" ")[0]);
+    const c1 = WIRE_COLORS[parts[0]], c2 = WIRE_COLORS[parts[1]];
+    if (!c1) return "";
+    const bg = c2 ? `repeating-linear-gradient(115deg, ${c1} 0 4px, ${c2} 4px 8px)` : c1;
+    return `<span class="sw" aria-hidden="true" style="background:${bg}"></span>`;
+  }
+
+  function cardHTML(d) {
+    const color = CATEGORY_COLORS[d.category] || "var(--mint)";
+    const rows = (d.pins || []).map((p) => `
+      <tr><td><span class="pin" style="background:${color}">${esc(p.pin)}</span></td>
+          <td>${esc(p.signal)}</td>
+          <td>${p.wire ? `<span class="wire">${swatch(p.wire)}${esc(p.wire)}</span>` : "—"}</td></tr>`).join("");
+    const notes = (d.notes || []).map((n) => `<li>${esc(n)}</li>`).join("");
+    // Photos live in media/<device-id>/ in this repo.
+    const photos = (d.images || []).map((im) => `
+      <a href="${safeUrl(im.file)}" target="_blank" rel="noopener"><img src="${safeUrl(im.file)}" alt="${esc(im.caption || d.title)}" loading="lazy"></a>`).join("");
+    // A manual can be a copy in this repo (file), a link to the manufacturer (url), or both.
+    const manuals = (d.manuals || []).map((m) => {
+      const page = m.page ? ` · p. ${esc(m.page)}` : "";
+      const links = [];
+      if (m.file) links.push(`<a href="${safeUrl(m.file)}${m.page ? "#page=" + encodeURIComponent(m.page) : ""}" target="_blank" rel="noopener">${esc(m.title || "Manual")} (PDF)${page}</a>`);
+      if (m.url) links.push(`<a href="${safeUrl(m.url)}" target="_blank" rel="noopener">${esc(m.title || "Manual")} · manufacturer${m.file ? "" : page}</a>`);
+      return links.join("");
+    }).join("");
+    return `
+      <article class="card" id="${esc(d.id)}">
+        <div class="card-head"><h2>${esc(d.title)}</h2><span class="tag" style="background:${color}">${esc(d.category)}</span></div>
+        <div class="card-body">
+          <p class="meta">${esc(d.manufacturer)} · ${esc(d.model)} · ${esc(d.connector)}</p>
+          <table><thead><tr><th>Pin</th><th>Signal</th><th>Wire</th></tr></thead><tbody>${rows}</tbody></table>
+          ${notes ? `<ul class="notes">${notes}</ul>` : ""}
+          ${photos ? `<div class="photos">${photos}</div>` : ""}
+          ${manuals ? `<div class="manuals">${manuals}</div>` : ""}
+        </div>
+        <div class="foot"><span>${esc(d.source || "")}${d.updated ? " · " + esc(d.updated) : ""}</span>
+          <a href="#${esc(d.id)}" aria-label="Link to ${esc(d.title)}">Link</a></div>
+      </article>`;
+  }
+
+  function render() {
+    const q = $("#q").value.trim().toLowerCase();
+    const shown = devices.filter((d) =>
+      (activeCat === "All" || d.category === activeCat) &&
+      (!q || JSON.stringify(d).toLowerCase().includes(q)));
+    $("#list").innerHTML = shown.length ? shown.map(cardHTML).join("")
+      : `<div class="empty"><p>No match for that search.</p><a class="cta" href="${issueURL()}">Submit it as a new device</a></div>`;
+    $("#count").textContent = `${shown.length} of ${devices.length} terminations`;
+  }
+
+  function renderChips() {
+    const cats = ["All", ...new Set(devices.map((d) => d.category))];
+    $("#chips").innerHTML = cats.map((c) =>
+      `<button type="button" class="chip" aria-pressed="${c === activeCat}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+  }
+
+  function issueURL() {
+    return "submit.html";
+  }
+
+  $("#chips").addEventListener("click", (e) => {
+    const b = e.target.closest(".chip");
+    if (!b) return;
+    activeCat = b.dataset.cat;
+    renderChips(); render();
+  });
+  $("#q").addEventListener("input", render);
+  $("#submit").href = issueURL();
+
+  fetch("data/devices.json")
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then((data) => {
+      devices = data.sort((a, b) => a.category.localeCompare(b.category) || a.title.localeCompare(b.title));
+      renderChips(); render();
+      if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+    })
+    .catch(() => {
+      $("#list").innerHTML = `<div class="empty"><p>Couldn't load data/devices.json. If you opened this file directly, run a local server (see README).</p></div>`;
+    });
+</script>
+</body>
+</html>
