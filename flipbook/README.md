@@ -9,4 +9,4 @@ Printable copies of the 14-card field flipbook.
 
 **Printing:** set scaling to **100% / Actual size** (not "Fit to page"), and turn on background graphics if your printer dialog asks. Punch the circle in each card's top-left corner and put them on a binder ring.
 
-**Updating:** the cards are designed in the Field Termination Flipbook design canvas. After editing them there, export new PDFs and replace these two files with the same names, so links from the site keep working.
+**Updating:** the cards are designed in the [Field Termination Flipbook design canvas](https://claude.ai/artifact/RkbDm7Z4pHuZXdyAuo8xz7) (14 artboards, 4×6 in). After editing them there, export new PDFs and replace these two files with the same names, so links from the site keep working.
